@@ -1,0 +1,49 @@
+{
+  "name": "eVo Edge Platform",
+  "type": "sw.application",
+  "description": "Distributed edge computing platform with real-time data processing and IoT integration",
+  "post-provisioning": [
+    "# eVo is now running!",
+    "The eVo edge computing platform has been deployed to your device.",
+    "",
+    "## Next Steps",
+    "1. Your eVo leaf node will automatically connect to the master eVo instance",
+    "2. Monitor logs in the Balena Cloud dashboard",
+    "3. Access the eVo dashboard to manage your edge node",
+    "",
+    "## Configuration",
+    "The configuration is automatically fetched from the CONFIG_URL.",
+    "Check the environment variables in Balena Cloud to verify the setup."
+  ],
+  "assets": {
+    "repository": {
+      "type": "blob.asset",
+      "data": {
+        "url": "https://github.com/virtualobj/evo-balena"
+      }
+    }
+  },
+  "data": {
+    "applicationEnvironmentVariables": [
+      {
+        "name": "CONFIG_URL",
+        "description": "URL to fetch the eVo configuration file",
+        "defaultValue": "%%configUrl%%",
+        "type": "string"
+      }
+    ],
+    "defaultDeviceEnvironmentVariables": [
+      {
+        "name": "CONFIG_URL",
+        "value": "%%configUrl%%"
+      }
+    ],
+    "defaultDeviceType": "raspberrypi4-64",
+    "supportedDeviceTypes": [
+      "raspberrypi3-64",
+      "raspberrypi4-64",
+      "raspberrypi5",
+      "generic-aarch64"
+    ]
+  }
+}

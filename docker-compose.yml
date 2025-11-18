@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  evo:
+    image: virtualobj/evo:1a9e6d3
+    privileged: true
+    restart: always
+    network_mode: host
+    volumes:
+      - 'evo-nats:/nats'
+      - 'evo-config:/evo'
+      - 'evo-log:/log'
+      - 'evo-postgresql:/postgresql'
+    environment:
+      # Configuration will be fetched from the webhook URL
+      # Set via configUrl parameter in deploy button or manually in Balena dashboard
+      # When CONFIG_URL is set, eVo will automatically fetch and use the config
+      CONFIG_URL: ''
+      EVO_DIR: /evo
+      DB_DIR: /postgresql
+      LOG_DIR: /log
+      NATS_DIR: /nats
+    labels:
+      io.balena.features.kernel-modules: '1'
+      io.balena.features.firmware: '1'
+      io.balena.features.dbus: '1'
+      io.balena.features.supervisor-api: '1'
+
+volumes:
+  evo-nats:
+  evo-config:
+  evo-log:
+  evo-postgresql:
