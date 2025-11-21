@@ -2,7 +2,11 @@ version: '2'
 
 services:
   evo:
-    image: virtualobj/evo:1a9e6d3
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
     privileged: true
     restart: always
     network_mode: host
