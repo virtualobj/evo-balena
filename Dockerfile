@@ -1,12 +1,13 @@
 #FROM evo-balena-local:latest
-FROM --platform=linux/arm64 virtualobj/evo:b894f08
+# Force arm64 platform for Raspberry Pi devices
+FROM --platform=linux/arm64 virtualobj/evo:3b06a03
 
 # Install curl for config fetching
 RUN apk add --no-cache curl
 
-# Copy startup script
-COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+# Copy startup script and fix line endings
+COPY start.sh /app/start.sh
+RUN sed -i 's/\r$//' /app/start.sh && chmod +x /app/start.sh
 
-# Set the startup script as entrypoint
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+# Set the startup script as entrypoint - run through sh explicitly
+ENTRYPOINT ["/bin/sh", "/app/start.sh"] 
