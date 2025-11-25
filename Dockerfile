@@ -1,6 +1,6 @@
 #FROM evo-balena-local:latest
 # Force arm64 platform for Raspberry Pi devices
-FROM --platform=linux/arm64 virtualobj/evo:e176538
+FROM --platform=linux/arm64 virtualobj/evo:c007401
 
 # Install curl for config fetching
 RUN apk add --no-cache curl
